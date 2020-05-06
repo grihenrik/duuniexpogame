@@ -57,7 +57,7 @@
     $pathID=2;
     $exam_id=$pathID;
     $wpdb->query("call sp_New_Player('$token','$nick',2,2)");
-    //var_dump($token);
+    
     /**
      * Build the questions and answers string for the user
      * it should be in the form of
@@ -82,15 +82,6 @@
     // Third, Get the question and answer array from the database
     $all_questions = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".DUUNIEXPO_QUESTIONS." WHERE exam_id=%d ", $exam_id));
     $all_choices = $wpdb->get_results($wpdb->prepare("select a.question_id,q.question,a.ID,a.answer from ".DUUNIEXPO_ANSWERS." a join ".DUUNIEXPO_QUESTIONS." q on a.question_id=q.ID"));
-    var_dump($all_questions{0}{"question"});
-    // $kkeys=array_keys($all_choices);
-    // foreach ($kkeys as $kkey){
-    //     foreach ($array_choices[$kkey] as $k => $v) {
-    //     echo "\$a[$k] => $v.\n";
-    // }
-    // }
-    
-    
     $result = array(
         "playerToken" => "{$token}",
         0=> array( "question" => "Is there a difference between a jungle and a rain forest?",
